@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<title>Hexapawn</title>
+	<meta http-equiv="content" content="text/html" charset="utf-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1>Hexapawn</h1>
+                <h3>The game that learns</h3>
+            </div>
+        </div>
+		<div class="row">
+            <div id="canvas_hexapawn_container" class="col-sm-12 text-center">
+				<div id="canvas_hexapawn"></div>
+			</div>
+        </div>
+		<div class="row">
+            <div class="col-sm-12 text-center">
+				<p><span>Winners: </span><span id="win_array">-</span></p>
+			</div>
+        </div>
+		<div class="row">
+            <div class="col-sm-12 text-center">
+				<div id="button_restart" class="button_game button_restart">Restart</div>
+				<div id="button_instructions" class="button_game button_instructions">Instructions</div>
+			</div>
+        </div>
+        <div id="instructions_container">
+			<div class="instructions_box">
+				<span class="close">X</span>
+				<h3><b>Instructions:</b></h3>
+				<p>You are the red pieces and your enemy is the black pieces.</p>
+				<p>Click on one of your pieces and then click on a square where you want to put it.</p>
+				<p>Wait until computer makes a move.</p>
+			</div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/data.js"></script>
+<script src="js/script.js"></script>

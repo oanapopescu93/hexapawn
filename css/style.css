@@ -1,0 +1,141 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100% !important;
+    height: 100%;
+    font-family: arial;
+    background-color: black;
+    color:red;
+    position: relative;
+    font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, address {
+    margin: 0px;
+}
+
+h1 {
+    font-size: 32px;
+    line-height: 32px;
+    font-family: impact;
+}
+
+h2 {
+    font-size: 28px;
+    line-height: 28px;
+    font-family: impact;
+}
+
+h3 {
+    font-size: 20px;
+    line-height: 20px;
+    font-family: impact;
+}
+
+h4 {
+    font-size: 22px;
+    line-height: 22px;
+    font-family: impact;
+}
+
+h5 {
+    font-size: 18px;
+    line-height: 18px;
+    font-family: arial;
+}
+
+h6 {
+    font-size: 12px;
+    line-height: 12px;
+	font-family: arial;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+a, a:hover, a:focus {
+    text-decoration: none;
+}
+
+a:focus {
+    outline: 0px auto -webkit-focus-ring-color;
+}
+
+:focus {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+canvas{
+    border:solid 1px red;
+    display:inline-block;
+    margin-top:20px;
+}
+
+.button_game{
+	display:inline-block;
+	padding:5px 10px;
+	margin:5px;
+	width:100%;
+	max-width:100px;
+	border:solid 1px red;
+	border-radius:10px;
+	cursor:pointer;
+}
+#instructions_container{
+	display:none;
+	background:black;
+	position:fixed;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	width:100%;
+}
+.instructions_box{
+	transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border: solid 1px red;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+	left: 50%;
+	text-align:left;
+}
+.instructions_box .close{
+	color:red;
+	opacity:1;
+	text-shadow:none;
+	position: absolute;
+	top:20px;
+	right:20px;
+}
+#instructions_container.open{
+	display:block;
+}
+#canvas_hexapawn{
+    overflow:auto;
+}
+
+::-webkit-scrollbar{
+	width: 10px;
+	border-radius: 10px;
+	border: 1px solid red;
+}
+
+::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	background-color: red;
+	border: 3px solid transparent;
+    border-radius: 10px;
+    background-clip: content-box;
+}
