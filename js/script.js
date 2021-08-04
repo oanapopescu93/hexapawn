@@ -20,21 +20,22 @@ var who_array = [];
 
 $(document).ready(function(){
 	enemy_moves = enemy_moves_data;
-	console.log(nr)
 
-	game = new hex_game('canvas_hexapawn');
-	game.ready();
-	
-	$('#button_instructions').off('click').on('click', function(event) {
-		$('#instructions_container').toggleClass('open');
-	});
-	$('.close').off('click').on('click', function(event) {
-		$('#instructions_container').removeClass('open');
-	});
-	
-	$('#button_restart').off('click').on('click', function(event) {
-		game.restart();
-	});
+	setTimeout(function(){
+		game = new hex_game('canvas_hexapawn');
+		game.ready();
+		
+		$('#button_instructions').off('click').on('click', function(event) {
+			$('#instructions_container').toggleClass('open');
+		});
+		$('.close').off('click').on('click', function(event) {
+			$('#instructions_container').removeClass('open');
+		});
+		
+		$('#button_restart').off('click').on('click', function(event) {
+			game.restart();
+		});
+	}, 100);	
 });
 
 function hex_game(id){
@@ -435,6 +436,16 @@ function hex_game(id){
 					message = "Invalid move! You can't move diagonally if you don't attack.";
 				}
 			}
+		} else if(x2 == x1 && y2 != y1){
+			//check up moves to attack
+			validate = true
+			for(var i in game_pieces_enemy){
+				if(game_pieces_enemy[i].x == x1 && game_pieces_enemy[i].y == y2){
+					validate = false;
+					message = "Invalid move! You can only attack on diagonal.";
+					break;
+				}
+			}			
 		} else {
 			validate = true
 		}
