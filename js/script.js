@@ -20,6 +20,10 @@ var who_array = [];
 
 $(document).ready(function(){
 	enemy_moves = enemy_moves_data;
+	
+	var date = new Date();
+	date = date.getFullYear();
+	$('#copyright_year').text(date);
 
 	setTimeout(function(){
 		game = new hex_game('canvas_hexapawn');
