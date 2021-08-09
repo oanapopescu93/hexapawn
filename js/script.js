@@ -73,7 +73,7 @@ function hex_game(id){
 	this.enemy_moves_data = function(){  
 		var cookie_history = document.cookie.split('; ')
 		for(var i in cookie_history){	
-			console.log(cookie_history[i])		
+			//console.log(cookie_history[i])		
 			if(typeof getCookie(cookie_history[i]) != "undefined" || getCookie(cookie_history[i]) == "" || getCookie(cookie_history[i]) == null || getCookie(cookie_history[i]) == "null"){
 				var index = cookie_history[i].indexOf("=");
 				var name = cookie_history[i].substr(0, index);
@@ -81,7 +81,7 @@ function hex_game(id){
 				for(var j in enemy_moves){
 					for(var k in enemy_moves[j]){
 						if(enemy_moves[j][k].pattern_id == name){
-							console.log(enemy_moves[j][k])
+							//console.log(enemy_moves[j][k])
 							for(var t in enemy_moves[j][k].choice){
 								if(value == enemy_moves[j][k].choice[t].c){
 									//distroy choices that made enemy lose
@@ -424,6 +424,8 @@ function hex_game(id){
 			x2 = next.x;
 			y2 = next.y;
 		}
+
+		console.log(x1, x2, y1, y2)	
 		
 		if(y2 > y1){
 			//check back moves	
@@ -432,7 +434,7 @@ function hex_game(id){
 			//check left/right moves	
 			message = "Invalid move! You can't move left or right.";
 		} else if((x1+nr==x2 && y1-nr==y2) || (x1-nr==x2 && y1-nr==y2)){
-			//check diagonal moves			
+			//check diagonal moves					
 			for(var i in game_pieces_enemy){
 				if(x2 == game_pieces_enemy[i].x && y2 == game_pieces_enemy[i].y){
 					validate = true;
@@ -452,7 +454,11 @@ function hex_game(id){
 				}
 			}			
 		} else {
-			validate = true
+			if((x1+nr>=x2 && y1-nr<=y2) || (x1-nr<=x2 && y1-nr>=y2)){
+				message = "Invalid move! What the hell was that move???";
+			} else {
+				validate = true
+			}
 		}
 
         return validate;
@@ -548,4 +554,12 @@ function deleteAllCookies() {
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
+}
+
+function show_results(message){
+	$('.show_results_container').show();
+	$('.show_results p').text(message);
+	$( ".show_results_container" ).click(function() {
+		$('.show_results_container').hide();
+	});
 }

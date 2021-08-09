@@ -41,6 +41,18 @@ $(document).ready(function(){
 					{c:1, x1: 0, y1: 0, x2: 1*nr, y2: 1*nr},
 				]
 			},
+			// {
+			// 	pattern_id: '2-2',//
+			// 	pattern: {
+			// 		you: [{x: 0, y: 2*nr},{x: 0, y: 2*nr},{x: 2*nr, y: 1*nr}],
+			// 		enemy: [{x: 0, y: 0},{x: 1*nr, y: 0},{x: 2*nr, y: 0}]
+			// 	},
+			// 	choice: [
+			// 		{c:0, x1: 0, y1: 0, x2: 0, y2: 1*nr},
+			// 		{c:1, x1: 1*nr, y1: 0, x2: 1*nr, y2: 1*nr},
+			// 		{c:2, x1: 1*nr, y1: 0, x2: 2*nr, y2: 1*nr},
+			// 	]
+			// },
 		],
 		[
 			{
