@@ -425,7 +425,7 @@ function hex_game(id){
 			y2 = next.y;
 		}
 
-		console.log(x1, x2, y1, y2)	
+		//console.log(x1, x2, y1, y2)	
 		
 		if(y2 > y1){
 			//check back moves	
@@ -433,17 +433,20 @@ function hex_game(id){
 		} else if(y2 == y1 && x2 != x1){
 			//check left/right moves	
 			message = "Invalid move! You can't move left or right.";
-		//} else if((x1+nr==x2 && y1-nr==y2) || (x1-nr==x2 && y1-nr==y2)){
 		} else if(Math.abs(x1-x2) == Math.abs(y1-y2)){
-			//check diagonal moves					
-			for(var i in game_pieces_enemy){
-				if(x2 == game_pieces_enemy[i].x && y2 == game_pieces_enemy[i].y){
-					validate = true;
-					break;
-				} else {
-					message = "Invalid move! You can't move diagonally if you don't attack.";
+			//check diagonal moves
+			message = "Invalid move! What was that move???"; 
+			if((x1+nr==x2 && y1-nr==y2) || (x1-nr==x2 && y1-nr==y2)){
+				//diagonal move one space only to attack
+				for(var i in game_pieces_enemy){
+					if(x2 == game_pieces_enemy[i].x && y2 == game_pieces_enemy[i].y){
+						validate = true;
+						break;
+					} else {
+						message = "Invalid move! You can't move diagonally if you don't attack.";
+					}
 				}
-			}
+			}			
 		} else if(x2 == x1 && y2 != y1){
 			//check up moves to attack
 			validate = true
