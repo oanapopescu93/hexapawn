@@ -72,7 +72,8 @@ function hex_game(id){
 
 	this.enemy_moves_data = function(){  
 		var cookie_history = document.cookie.split('; ')
-		for(var i in cookie_history){			
+		for(var i in cookie_history){	
+			console.log(cookie_history[i])		
 			if(typeof getCookie(cookie_history[i]) != "undefined" || getCookie(cookie_history[i]) == "" || getCookie(cookie_history[i]) == null || getCookie(cookie_history[i]) == "null"){
 				var index = cookie_history[i].indexOf("=");
 				var name = cookie_history[i].substr(0, index);
@@ -362,7 +363,7 @@ function hex_game(id){
 					not_eaten++;
 					for(var j in game_pieces_enemy){
 						if(!game_pieces_enemy[j].eaten){
-							if(game_pieces_you[i].x == game_pieces_enemy[j].x && game_pieces_you[i].y-200 == game_pieces_enemy[j].y){
+							if(game_pieces_you[i].x == game_pieces_enemy[j].x && game_pieces_you[i].y-nr == game_pieces_enemy[j].y){
 								out_of_moves++;
 							}
 						}
@@ -403,7 +404,7 @@ function hex_game(id){
 				}
 				//if enemy arrived at the bottom
 				for(var i in game_pieces_enemy){
-					if(game_pieces_enemy[i].y == 400){
+					if(game_pieces_enemy[i].y == 2*nr){
 						game_win = 'enemy';
 						break
 					}
@@ -430,7 +431,7 @@ function hex_game(id){
 		} else if(y2 == y1 && x2 != x1){
 			//check left/right moves	
 			message = "Invalid move! You can't move left or right.";
-		} else if((x1+200==x2 && y1-200==y2) || (x1-200==x2 && y1-200==y2)){
+		} else if((x1+nr==x2 && y1-nr==y2) || (x1-nr==x2 && y1-nr==y2)){
 			//check diagonal moves			
 			for(var i in game_pieces_enemy){
 				if(x2 == game_pieces_enemy[i].x && y2 == game_pieces_enemy[i].y){
