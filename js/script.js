@@ -283,7 +283,7 @@ function hex_game(id){
 		}
 
 		setTimeout(function(){
-			show_results(text)
+			self.show_results(text)
 		}, milisecs);
 	}
 
@@ -433,7 +433,8 @@ function hex_game(id){
 		} else if(y2 == y1 && x2 != x1){
 			//check left/right moves	
 			message = "Invalid move! You can't move left or right.";
-		} else if((x1+nr==x2 && y1-nr==y2) || (x1-nr==x2 && y1-nr==y2)){
+		//} else if((x1+nr==x2 && y1-nr==y2) || (x1-nr==x2 && y1-nr==y2)){
+		} else if(Math.abs(x1-x2) == Math.abs(y1-y2)){
 			//check diagonal moves					
 			for(var i in game_pieces_enemy){
 				if(x2 == game_pieces_enemy[i].x && y2 == game_pieces_enemy[i].y){
@@ -454,11 +455,7 @@ function hex_game(id){
 				}
 			}			
 		} else {
-			if((x1+nr>=x2 && y1-nr<=y2) || (x1-nr<=x2 && y1-nr>=y2)){
-				message = "Invalid move! What the hell was that move???";
-			} else {
-				validate = true
-			}
+			validate = true
 		}
 
         return validate;
@@ -486,6 +483,15 @@ function hex_game(id){
 				break;
 			}
 		}
+	}
+
+	this.show_results = function(message){
+		$('.show_results_container').show();
+		$('.show_results p').text(message);
+		$( ".show_results_container" ).click(function() {
+			$('.show_results_container').hide();
+			self.restart();
+		});
 	}
 }
 
@@ -554,12 +560,4 @@ function deleteAllCookies() {
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
-}
-
-function show_results(message){
-	$('.show_results_container').show();
-	$('.show_results p').text(message);
-	$( ".show_results_container" ).click(function() {
-		$('.show_results_container').hide();
-	});
 }
