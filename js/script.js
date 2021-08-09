@@ -216,33 +216,35 @@ function hex_game(id){
 								}
 							}
 						} else {
-							//just move piece		
+							//just move piece	
 						} 
 						self.change_your_pos(obj, piece_selected);			
 						var check_win = self.check_win(game_pieces_you, game_pieces_enemy, false);
-
 						if(typeof check_win == "undefined"){
 							if(my_selected_piece.x == obj.x && my_selected_piece.y == obj.y){
-								//selected a piece then you changed your mind	
+								//selected a piece then you changed your mind
 							} else {
-								//select a piece then you move it							
+								//select a piece then you move it			
 								self.enemy_makes_move();
 								check_win = self.check_win(game_pieces_you, game_pieces_enemy, true);
 								if(typeof check_win !== "undefined"){
-									self.end_game(check_win + ' won!!!', 1000, check_win);
+									self.end_game('Results', check_win + ' won!!!', 1000, check_win);
 								}	
 							}
-						} else {	
-							self.end_game(check_win + ' won!!!', 1000, check_win);
+						} else {
+							self.end_game('Results', check_win + ' won!!!', 1000, check_win);
 						}
 						
 						self.drawSquares();
 						self.drawPieces();		
                     } else {
 						//some errors
-						self.end_game(message, 0);
+						make_move = 0;
+						self.drawSquares();
+						self.drawPieces();
+						self.end_game('Invalid move', message, 0);
                     }                  
-                } else {		
+                } else {	
 					my_selected_piece = obj;	
                     for(var i in game_pieces_you){
                         if(game_pieces_you[i].x == obj.x && game_pieces_you[i].y == obj.y){
@@ -261,7 +263,7 @@ function hex_game(id){
         }
     }
 
-	this.end_game = function(text, milisecs, who){
+	this.end_game = function(title, text, milisecs, who){
 		if(typeof who != "undefined"){
 			who_array.push(who);		
 		}
@@ -283,7 +285,7 @@ function hex_game(id){
 		}
 
 		setTimeout(function(){
-			self.show_results(text)
+			self.show_results(title, text, who)
 		}, milisecs);
 	}
 
@@ -424,41 +426,40 @@ function hex_game(id){
 			x2 = next.x;
 			y2 = next.y;
 		}
-
-		//console.log(x1, x2, y1, y2)	
 		
 		if(y2 > y1){
 			//check back moves	
-			message = "Invalid move! You can't move back.";
+			message = "You can't move back.";
 		} else if(y2 == y1 && x2 != x1){
 			//check left/right moves	
-			message = "Invalid move! You can't move left or right.";
-		} else if(Math.abs(x1-x2) == Math.abs(y1-y2)){
-			//check diagonal moves
-			message = "Invalid move! What was that move???"; 
-			if((x1+nr==x2 && y1-nr==y2) || (x1-nr==x2 && y1-nr==y2)){
-				//diagonal move one space only to attack
-				for(var i in game_pieces_enemy){
-					if(x2 == game_pieces_enemy[i].x && y2 == game_pieces_enemy[i].y){
-						validate = true;
-						break;
-					} else {
-						message = "Invalid move! You can't move diagonally if you don't attack.";
-					}
+			message = "You can't move left or right.";
+		} if((x1+nr==x2 && y1-nr==y2) || (x1-nr==x2 && y1-nr==y2)){
+			//diagonal move one space only to attack
+			for(var i in game_pieces_enemy){
+				if(x2 == game_pieces_enemy[i].x && y2 == game_pieces_enemy[i].y){
+					validate = true;
+					break;
+				} else {
+					message = "You can't move diagonally if you don't attack.";
 				}
-			}			
+			}		
 		} else if(x2 == x1 && y2 != y1){
-			//check up moves to attack
-			validate = true
+			//check move front to atack
+			validate = true;
 			for(var i in game_pieces_enemy){
 				if(game_pieces_enemy[i].x == x1 && game_pieces_enemy[i].y == y2){
 					validate = false;
-					message = "Invalid move! You can only attack on diagonal.";
+					message = "You can only attack on diagonal.";
 					break;
 				}
 			}			
 		} else {
-			validate = true
+			validate = false;
+			message = "What was that move???";
+			if(x1==x2 && y1==y2){
+				//same click
+				validate = true;
+			}
 		}
 
         return validate;
@@ -488,12 +489,15 @@ function hex_game(id){
 		}
 	}
 
-	this.show_results = function(message){
+	this.show_results = function(title, message, who){
 		$('.show_results_container').show();
+		$('.show_results h1').text(title);
 		$('.show_results p').text(message);
 		$( ".show_results_container" ).click(function() {
 			$('.show_results_container').hide();
-			self.restart();
+			if(typeof who != "undefined"){
+				self.restart();	
+			}			
 		});
 	}
 }
