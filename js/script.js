@@ -283,7 +283,7 @@ function hex_game(id){
 		}
 
 		setTimeout(function(){
-			alert(text)
+			show_results(text)
 		}, milisecs);
 	}
 
